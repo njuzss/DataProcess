@@ -1,26 +1,31 @@
-function genViewSet(K,vPath,imClass)
+function genViewSet(K,vPath,views,index,imClass)
 
-label_all = cell(5,1);
+label_all = cell(views);
 
-for i = 1:5
+for i = 1:views
     load(strcat(vPath,num2str(i),'\',imClass,'_labels.mat'));
     label_all{i} = labels;
     clear idx;
 end
 
-for i = 1:length(label_all{i})
-    file = strcat(imClass,'_view','.txt');
-    fp = fopen(file,'at');
+file = strcat(imClass,'_view','.model');
+fp = fopen(file,'w');
+for i = 1:length(label_all{1})
     
+    flag = false;
     for j = 1:length(label_all)
-        temp = label_all{j}(i);
-        if(~isempty(temp{1}))
-            for x = 1:length(temp{1})
-                fprintf(fp,'%d ',temp{1}(x)+K*(j-1));
+        temp = label_all{j}{i};
+        if(~isempty(temp))
+            flag =true;
+            for x = 1:length(temp)
+                fprintf(fp,'%d ',temp(x)+K*(index-1)*views+K*(j-1));
             end
         end
     end
-    fprintf(fp,'\n');
-    fclose(fp);
+    if(flag)
+        fprintf(fp,'\n');
+    end
+    
 end
+fclose(fp);
 end
