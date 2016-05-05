@@ -76,7 +76,7 @@ for i= 1:length(labels)
     labels{i} = unique(labels{i});
 end
 
-labels_gmm = strcat(imClass,'_labels');
+labels_gmm = strcat(vPath,view,'\',imClass,'_labels');
 save(labels_gmm,'labels');
 
 
