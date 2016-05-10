@@ -1,4 +1,4 @@
-function detectGMM( vPath,view,imClass,pPath )
+function detectGMM( vPath,view,imClass )
 
 load(strcat(vPath,view,'\',imClass,'_hog.mat'));
 load(strcat(vPath,view,'\',imClass,'_gmm.mat'));
@@ -22,26 +22,29 @@ for i= 1:length(labels)
     labels_uniq{i} = unique(labels{i});
 end
 
-nums = labels_uniq;
+%% count patch number of every cluster
+% nums = labels_uniq;
+% 
+% for i = 1:length(labels)
+%     for j = 1:length(nums{i})
+%         num_count = 0;
+%         for k = 1:length(labels{i})
+%             if(labels{i}(k) == nums{i}(j))
+%                 num_count = num_count +1;
+%             end
+%         end
+%         nums{i}(j) = num_count;
+%     end
+% end
+% nums_gmm = strcat(vPath,view,'\',imClass,'_nums');
+% save(nums_gmm,'nums');
 
-for i = 1:length(labels)
-    for j = 1:length(nums{i})
-        num_count = 0;
-        for k = 1:length(labels{i})
-            if(labels{i}(k) == nums{i}(j))
-                num_count = num_count +1;
-            end
-        end
-        nums{i}(j) = num_count;
-    end
-end
-
+%% strore labels
 labels = labels_uniq;
 
 labels_gmm = strcat(vPath,view,'\',imClass,'_labelss');
 save(labels_gmm,'labels');
 
-nums_gmm = strcat(vPath,view,'\',imClass,'_nums');
-save(nums_gmm,'nums');
+
 
 end
