@@ -1,9 +1,9 @@
 clear;
-vPath='D:\Experiments\MultiView\database\';
+vPath='D:\Experiments\MultiView\';
 imPath='Projections\';
 pPath='Patches\';
 K=60;
-imClass = char('armchairs','sofas','endtables','teatables');
+imClass = char('armchair','sofa','endtable','teatable');
 view = 5;
 scene = 64;
 
@@ -20,7 +20,7 @@ scene = 64;
 % toc;
 %% generate database
 for j = 1:4
-    for i = 1:5
-        genDatabase(vPath,j,deblank(imClass(j,:)),i,K,view);
-    end
+    
+    genDatabase(vPath,j,deblank(imClass(j,:)),K,view);
+    
 end
